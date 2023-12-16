@@ -8,7 +8,7 @@ import 'package:seccion6/core/widgets/custom_button.dart';
 import 'package:seccion6/features/create_task/widgets/custom_textform.dart';
 import 'package:seccion6/features/create_task/widgets/date_textform.dart';
 import 'package:seccion6/features/home/home_view.dart';
-import 'package:seccion6/features/home/widgets/time_textform.dart';
+import 'package:seccion6/features/create_task/widgets/time_textform.dart';
 
 class AddTask extends StatefulWidget {
   const AddTask({super.key});
