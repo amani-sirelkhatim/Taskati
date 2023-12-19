@@ -13,6 +13,18 @@ TextStyle getTitleStyle(
   );
 }
 
+TextStyle getheadingStyle(
+    {Color color = Colors.black,
+    double fontSize = 35,
+    FontWeight fontWeight = FontWeight.bold}) {
+  return TextStyle(
+    color: color,
+    fontSize: fontSize,
+    fontWeight: fontWeight,
+    fontFamily: GoogleFonts.poppins().fontFamily,
+  );
+}
+
 TextStyle getBodyStyle(
     {Color color = Colors.black,
     double fontSize = 16,

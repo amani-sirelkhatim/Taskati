@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:seccion6/core/utils/app_colors.dart';
-import 'package:seccion6/core/utils/styles.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:seccion6/core/storage/task_model.dart';
+import 'package:seccion6/core/themes.dart';
+
 import 'package:seccion6/splash_view.dart';
 
-void main() {
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarIconBrightness: Brightness.dark,
-      statusBarColor: AppColor.whitecolor));
+void main() async {
+  await Hive.initFlutter();
+  Hive.registerAdapter(taskAdapter());
+  await Hive.openBox<task>('task');
+  await Hive.openBox('user');
+  await Hive.openBox<bool>('mode');
   runApp(const MyApp());
 }
 
@@ -17,29 +21,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        appBarTheme: AppBarTheme(
-            titleTextStyle: getTitleStyle(color: AppColor.primarycolor)),
-        inputDecorationTheme: InputDecorationTheme(
-          contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(15),
-            borderSide: BorderSide(color: AppColor.primarycolor),
-          ),
-          focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: BorderSide(color: AppColor.primarycolor)),
-          errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: BorderSide(color: AppColor.redcolor)),
-          focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(15),
-              borderSide: BorderSide(color: AppColor.redcolor)),
-        ),
-      ),
-      debugShowCheckedModeBanner: false,
-      home: SplashView(),
-    );
+    return ValueListenableBuilder<Box<bool>>(
+        valueListenable: Hive.box<bool>('mode').listenable(),
+        builder: (context, value, child) {
+          var darkmode = value.get('darkmode', defaultValue: false)!;
+          return MaterialApp(
+            themeMode: darkmode ? ThemeMode.dark : ThemeMode.light,
+            darkTheme: darkTheme,
+            theme: lightTheme,
+            debugShowCheckedModeBanner: false,
+            home: SplashView(),
+          );
+        });
   }
 }

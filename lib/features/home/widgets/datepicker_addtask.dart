@@ -27,10 +27,12 @@ class _secondPartState extends State<secondPart> {
               children: [
                 Text(
                   DateFormat.MMMMEEEEd().format(DateTime.now()),
-                  style:
-                      getTitleStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  style: Theme.of(context).textTheme.displayLarge,
                 ),
-                Text('Today', style: getTitleStyle(fontSize: 18))
+                Text(
+                  'Today',
+                  style: Theme.of(context).textTheme.displayLarge,
+                )
               ],
             ),
             Spacer(),
@@ -45,18 +47,6 @@ class _secondPartState extends State<secondPart> {
           ],
         ),
         Gap(15),
-        DatePicker(
-          DateTime.now(),
-          initialSelectedDate: DateTime.now(),
-          selectionColor: AppColor.primarycolor,
-          selectedTextColor: Colors.white,
-          onDateChange: (date) {
-            // New date selected
-            setState(() {
-              // _selectedValue = date;
-            });
-          },
-        ),
       ],
     );
   }

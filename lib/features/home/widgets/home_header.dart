@@ -46,7 +46,7 @@ class _homeHeaderState extends State<homeHeader> {
             ),
             Text(
               'Have a nice day',
-              style: getBodyStyle(fontSize: 14),
+              style: Theme.of(context).textTheme.displayMedium,
             ),
           ],
         ),
@@ -56,11 +56,8 @@ class _homeHeaderState extends State<homeHeader> {
             pushWithReplacment(context, profile());
           },
           child: CircleAvatar(
-            radius: 28,
-            backgroundImage: (image != null)
-                ? FileImage(File(image!)) as ImageProvider
-                : const AssetImage('assets/user.png'),
-          ),
+              radius: 28,
+              backgroundImage: FileImage(File(image!)) as ImageProvider),
         ),
       ],
     );

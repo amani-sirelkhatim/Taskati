@@ -26,11 +26,11 @@ class _customTextFormState extends State<customTextForm> {
       children: [
         Text(
           '${widget.name} :',
-          style: getTitleStyle(
-              fontWeight: FontWeight.bold, color: AppColor.primarycolor),
+          style: Theme.of(context).textTheme.displayLarge,
         ),
         Gap(10),
         TextFormField(
+            style: Theme.of(context).textTheme.displaySmall,
             maxLines: widget.maxlines,
             controller: widget.con,
             validator: (value) {
@@ -40,8 +40,8 @@ class _customTextFormState extends State<customTextForm> {
               return null;
             },
             decoration: InputDecoration(
-              hintText: 'Enter ${widget.name} here',
-            )),
+                hintText: 'Enter ${widget.name} here',
+                hintStyle: Theme.of(context).textTheme.displaySmall)),
       ],
     );
   }
